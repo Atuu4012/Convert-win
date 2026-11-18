@@ -16,7 +16,7 @@ written in C# / WPF. The interface, behaviour and shortcuts follow the original.
 | **Video** | anything ffmpeg can read (MP4, MOV, MKV, WebM, AVI, M4V…) | MP4 (H.264/HEVC/AV1), MOV (ProRes 422), WebM (VP9), MKV, GIF |
 | **Images** | JPEG, PNG, HEIC, TIFF, BMP, GIF, WebP, AVIF, ICO | JPEG, PNG, WebP, AVIF, TIFF, GIF, BMP, PDF |
 | **Documents** | DOCX, ODT, RTF, HTML, Markdown, plain text | PDF, DOCX, ODT, RTF, HTML, plain text |
-| **PDF** | any PDF | PNG or JPEG (one file per page), plain text |
+| **PDF** | any PDF | PNG or JPEG (one file per page), Word (DOCX), plain text |
 
 \* HE-AAC appears when the installed ffmpeg includes `libfdk_aac` (the gyan.dev *full* build does; the automatically downloaded *essentials* build does not).
 
@@ -25,6 +25,9 @@ written in C# / WPF. The interface, behaviour and shortcuts follow the original.
 - Advanced options per format: quality, bitrate, resolution, sample rate, frame rate, codec,
   hardware encoding, paper size, and "move originals to the Recycle Bin".
 - All processing is local. Nothing is uploaded.
+
+PDF → Word rebuilds headings and paragraphs from the PDF's text. Images, tables and the exact
+layout are not carried over, and a scanned PDF (which contains no text) can't be converted.
 
 ## Install
 
@@ -90,6 +93,7 @@ Convert.exe --cli pdf-doc report.docx
 Convert.exe --cli mp3 song.flac
 Convert.exe --cli png photo.heic
 Convert.exe --cli pdf-txt scan.pdf
+Convert.exe --cli pdf-docx scan.pdf
 ```
 
 `--cli` prints one `OK` or `FAIL` line per file and exits non-zero if any file failed.

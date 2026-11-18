@@ -221,6 +221,7 @@ public static class Targets
         Add(OutGroup.PdfPages,
             ("pdf-png", "PNG (one per page)", "png"),
             ("pdf-jpg", "JPEG (one per page)", "jpg"),
+            ("pdf-docx", "Word (DOCX)", "docx"),
             ("pdf-txt", "Plain Text", "txt"));
 
         // Hide what this machine can't actually write, exactly like the original hides
@@ -306,7 +307,8 @@ public static class TargetOptions
 
     /// <summary>Whether the panel has anything to show under "Advanced" for this format.</summary>
     public static bool HasSettings(this Target t) =>
-        !(t.Group == OutGroup.Document && t.Id != "pdf-doc") && t.Id != "pdf-txt";
+        !(t.Group == OutGroup.Document && t.Id != "pdf-doc") &&
+        t.Id is not ("pdf-txt" or "pdf-docx");
 }
 
 public sealed class ConvSettings

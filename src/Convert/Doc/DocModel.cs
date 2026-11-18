@@ -59,6 +59,8 @@ public sealed class QuoteBlock : DocBlock
 
 public sealed class RuleBlock : DocBlock;
 
+public sealed class PageBreakBlock : DocBlock;
+
 public sealed class DocInline
 {
     public string Text { get; set; } = "";
@@ -231,6 +233,10 @@ li { margin: 0 0 3pt; }
                 sb.Append("<hr>\n");
                 break;
 
+            case PageBreakBlock:
+                sb.Append("<div style=\"page-break-after: always;\"></div>\n");
+                break;
+
             case ListBlock list:
                 var tag = list.Ordered ? "ol" : "ul";
                 sb.Append($"<{tag}>\n");
@@ -331,6 +337,10 @@ li { margin: 0 0 3pt; }
 
                 case RuleBlock:
                     sb.Append("---\n\n");
+                    break;
+
+                case PageBreakBlock:
+                    sb.Append('\f');
                     break;
 
                 case ListBlock list:

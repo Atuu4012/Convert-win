@@ -291,6 +291,10 @@ public static class DocxWriter
                     new W.ParagraphBorders(new W.BottomBorder { Val = BorderValues.Single, Size = 6 }))));
                 break;
 
+            case PageBreakBlock:
+                body.Append(new W.Paragraph(new W.Run(new W.Break { Type = BreakValues.Page })));
+                break;
+
             case QuoteBlock quote:
                 foreach (var inner in quote.Blocks)
                 {
